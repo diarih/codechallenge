@@ -13,19 +13,27 @@ export const getPosts = async () => {
 
 export const getPost = async (post_id) => {
   // EDIT HERE
-  // let users = await getPosts()
-  // console.log(users)
-  // users.forEach(user => {
-  //   user.post_id
-  // });
 }
-
 export const getPostComments = async (post_id) => {
-  // EDIT HERE
+  try {
+    const commentList = await fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
+    return commentList.json();
+  }
+  catch(error) {
+    console.log('getPost',error);
+    throw error;
+  }
 };
 
 export const getAuthor = async (user_id) => {
-  // EDIT HERE
+  try {
+    const author = await fetch('https://jsonplaceholder.typicode.com/users')
+    return author.json();
+  }
+  catch(error) {
+    console.log('getPost',error);
+    throw error;
+  }
 };
 
 export const getPostsByAuthor = async (author_id) => {
