@@ -34,11 +34,8 @@ const createPostElement = (thumbnail, post) => {
 
   // EDIT HERE
   elCardImg.setAttribute("src", thumbnail)
-  
-  post.forEach(e => {
-    elCardTitle.innerText = e.title;
-    // console.log(e)
-  });
+  elCardTitle.innerHTML = post.title
+  elCardBtn.setAttribute("href", "/post.html?post_id=$POST_ID")
 
   
   return elCol;
@@ -46,16 +43,11 @@ const createPostElement = (thumbnail, post) => {
 
 const renderPosts = async () => {
   // EDIT HERE
-  for (let i = 1; i <= 16; i++) {
-    
-    let posts = await getPosts()
-    // console.log(posts);
-    let pic = await getRandomPic();
-    let picture = pic
-    console.log(picture)
-    // console.log(pic);
-    elDaftarBerita.append(createPostElement(picture, posts))
-  }
+  let posts = await getPosts()
+  posts.map(async (value) => {
+    let pic = await getRandomPic()
+    elDaftarBerita.appendChild(createPostElement(pic, value))
+  })
 };
 
 renderPosts();
