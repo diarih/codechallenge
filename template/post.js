@@ -1,4 +1,5 @@
-const params; // tempat menampung parameter yang ada
+import * as helpers from './helpers.js';
+//const params; // tempat menampung parameter yang ada
 
 const elPageTitle = document.querySelector('#page-title');
 const elDetailBerita = document.querySelector('#detail-berita');
@@ -32,7 +33,24 @@ const createListElement = (comment) => {
 };
 
 const renderPost = async () => {
-  // EDIT HERE
-};
+  let getPost = await(helpers.getPost());
+
+  elCardImg.src = await(helpers.getRandomPic())
+  elCardAuthorImg.src = await(helpers.getRandomProfile())
+  elPageTitle.innerText = getPost.detail.title;
+  elCardText.innerText = getPost.detail.body;
+  elCardAuthorName.innerText = getPost.author.name;
+  elCardAuthorEmail.innerText = getPost.author.email;
+
+  let commendList = await(getPost.commentList);
+
+  console.log(getPost.detail);
+  for(let i=0; i<commendList.length;i++){
+    const newCommand = createListElement(commendList[i]);
+    elListGroup.appendChild(newCommand);
+  }
+  elLoading.classList.add("d-none");
+  elDetailBerita.classList.remove("d-none");
+}
 
 renderPost();
