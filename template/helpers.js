@@ -1,27 +1,19 @@
 export const getPosts = async () => {
-  //edit here
+  // EDIT HERE
+  try {
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const json = await posts.json()
+    const data = await json
+    return data;
+  } catch (error) {
+    console.log('getPosts error', error);
+    throw error;
+  }
 };
 
 export const getPost = async (post_id) => {
-  let detailPost;
-  try{
-    detailPost = await fetch('https://jsonplaceholder.typicode.com/posts')
-  }
-  catch(error){
-    console.log('getPost', error);
-    throw error;
-  }
-
-  let object = {
-    getRandomPic : await(getRandomPic()),
-    randomProfile : await(getRandomPic()),
-    commentList : await(getPostComments()),
-    detail : await(detailPost.json()),
-    author : await(getAuthor())
-  };
-  return object;
-};
-
+  // EDIT HERE
+}
 export const getPostComments = async (post_id) => {
   try {
     const commentList = await fetch('https://jsonplaceholder.typicode.com/posts/1/comments')

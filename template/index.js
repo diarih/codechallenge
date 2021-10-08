@@ -1,4 +1,4 @@
-import { getPosts, getRandomPic } from './helpers.js';
+import { getPost, getPosts, getRandomPic } from './helpers.js';
 
 const elDaftarBerita = document.querySelector('#daftar-berita');
 
@@ -33,12 +33,21 @@ const createPostElement = (thumbnail, post) => {
   elCol.appendChild(elCard);
 
   // EDIT HERE
+  elCardImg.setAttribute("src", thumbnail)
+  elCardTitle.innerHTML = post.title
+  elCardBtn.setAttribute("href", "/post.html?post_id=$POST_ID")
 
+  
   return elCol;
 };
 
 const renderPosts = async () => {
   // EDIT HERE
+  let posts = await getPosts()
+  posts.map(async (value) => {
+    let pic = await getRandomPic()
+    elDaftarBerita.appendChild(createPostElement(pic, value))
+  })
 };
 
 renderPosts();
