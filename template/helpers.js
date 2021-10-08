@@ -1,10 +1,24 @@
 export const getPosts = async () => {
   // EDIT HERE
+  try {
+    const posts = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const json = await posts.json()
+    const data = await json
+    return data;
+  } catch (error) {
+    console.log('getPosts error', error);
+    throw error;
+  }
 };
 
 export const getPost = async (post_id) => {
   // EDIT HERE
-};
+  // let users = await getPosts()
+  // console.log(users)
+  // users.forEach(user => {
+  //   user.post_id
+  // });
+}
 
 export const getPostComments = async (post_id) => {
   // EDIT HERE
