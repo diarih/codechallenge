@@ -44,10 +44,11 @@ const createPostElement = (thumbnail, post) => {
 const renderPosts = async () => {
   // EDIT HERE
   let posts = await getPosts()
-  posts.map(async (value) => {
+  posts.slice(0,16).map(async (value) => {
     let pic = await getRandomPic()
     elDaftarBerita.appendChild(createPostElement(pic, value))
   })
+  return posts
 };
 
 renderPosts();
